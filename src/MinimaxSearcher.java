@@ -71,7 +71,7 @@ public class MinimaxSearcher implements GameTreeSearcher {
 		// child, keeping track of the best
 		for (GameNode child : children) {
 			double childUtility = minimaxEval(child, depthLeft - 1);
-			// update best utility and move if appropriate
+			// update the best utility and move if appropriate
 			if ((maximizing && childUtility > bestUtility)
 					|| (!maximizing && childUtility < bestUtility)) {
 				bestUtility = childUtility;

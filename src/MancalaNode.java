@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author (anonymous) */
 public abstract class MancalaNode extends GameNode
 {
-	/* Note: the board state is represented an a single dimensional array
+	/* Note: the board state is represented as a single dimensional array
 	 * where the first pit (index 0) is the leftmost pit of the first (maximizing) player.
 	 * Pit indices increase counter-clockwise in the direction of play. 
 	 */
@@ -161,7 +161,7 @@ scoring pit.  Thus a simple measure of utility would be (s - s).
 		final int PLAYER_OFFSET = (player == MAX) ? 0 : MAX_SCORE_PIT + 1;
 		for (int i = PLAYER_OFFSET; i < PLAYER_OFFSET + PLAY_PITS; i++)
 			if (state[i] > 0)
-				legalMoves.add(i);
+				legalMoves.add(Integer.valueOf(i));
 		return legalMoves;
 	}
 

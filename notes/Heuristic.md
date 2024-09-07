@@ -21,6 +21,7 @@ could hash board state for dynamic programming
 
 ### Turns
 
-In each turn I have 12 possible choices which opens up 12 choices for the opponent. Could use this knowledge to choose the option where opponent's best choice next turn is the worst out of the twelve.
+In each turn I have ~6 possible choices which opens up ~6 choices for the opponent. Could use this knowledge to choose the option where opponent's best choice next turn is the worst out of the twelve.
 
-NEED TO CHECK IF MULTIPLE TURNS ARE ALLOWED
+# First Implementation
+

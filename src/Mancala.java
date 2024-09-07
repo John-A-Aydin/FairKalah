@@ -21,8 +21,8 @@ public class Mancala {
 		MancalaPlayer[] player = new MancalaPlayer[2];
 
 		// TODO (*1*) put player one class here
-		player[GameNode.MAX] = new HumanMancalaPlayer(); 
-		//		player[GameNode.MAX] = new SimpleMancalaPlayer(); 
+		// player[GameNode.MAX] = new HumanMancalaPlayer();
+		player[GameNode.MAX] = new SimpleMancalaPlayer();
 
 		// TODO (*2*) put player two class here
 		//		player[GameNode.MIN] = new HumanMancalaPlayer(); 
@@ -36,7 +36,7 @@ public class Mancala {
 		Stopwatch clock = new Stopwatch();
 		long timeTaken;
 
-		// Create an random initial node of a FairKalah (fair Mancala) game
+		// Create a random initial node of a FairKalah (fair Mancala) game
 		MancalaNode node = new ScoreDiffMancalaNode(-1);
 		System.out.println(node);
 
