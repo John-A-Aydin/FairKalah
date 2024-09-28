@@ -2,12 +2,12 @@
  * An extension of MancalaNode with a simple, score-difference utility evaluation function.
  * @author Todd W. Neller
  */
-public class JohnA2MancalaNode extends MancalaNode {
+public class JohnA3MancalaNode extends MancalaNode {
 
 	/**
 	 * See corresponding <code>MancalaNode</code> standard constructor documentation.
 	 */
-	public JohnA2MancalaNode() {
+	public JohnA3MancalaNode() {
 		super();
 	}
 
@@ -15,7 +15,7 @@ public class JohnA2MancalaNode extends MancalaNode {
 	 * See corresponding <code>MancalaNode</code> copy constructor documentation.
 	 * @param node node to be copied
 	 */
-	public JohnA2MancalaNode(MancalaNode node) {
+	public JohnA3MancalaNode(MancalaNode node) {
 		super(node);
 	}
 
@@ -23,7 +23,7 @@ public class JohnA2MancalaNode extends MancalaNode {
 	 * See corresponding <code>MancalaNode</code> FairKalah constructor documentation.
 	 * @param stateIndex FairKalah initial state index
 	 */
-	public JohnA2MancalaNode(int stateIndex) {
+	public JohnA3MancalaNode(int stateIndex) {
 		super(stateIndex);
 	}
 
@@ -45,6 +45,14 @@ public class JohnA2MancalaNode extends MancalaNode {
 				}
 			}
 		}
-		return state[MAX_SCORE_PIT] - state[MIN_SCORE_PIT] - max_enemy_score_gain;
+		double max_pieces = 0;
+		double min_pieces = 0;
+		for (int i = 0; i < MAX_SCORE_PIT; i++) {
+			max_pieces += state[i];
+		}
+		for (int i = MAX_SCORE_PIT + 1; i < MIN_SCORE_PIT; i++) {
+			min_pieces += state[i];
+		}
+		return (state[MAX_SCORE_PIT] - state[MIN_SCORE_PIT]) - max_enemy_score_gain + (max_pieces - min_pieces);
 	}
 }

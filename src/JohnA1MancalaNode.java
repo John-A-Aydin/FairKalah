@@ -27,22 +27,18 @@ public class JohnA1MancalaNode extends MancalaNode {
     super(stateIndex);
   }
 
-  /**
-   * Return the difference between current MAX and MIN score.
-   */
-  public double utility() {
-    double scoreDiff = state[MAX_SCORE_PIT] - state[MIN_SCORE_PIT];
-    // Try looking at possible range of score gain for next turn
-    // What function will produce the best results
-    //
-    // My play pits: 0-5
-    // My goal: 6
-    // Other play pits: 7-12
-    // Other goal: 13
-    for (int i = 0; i < state.length; i++) {
-      if (i + state[i] <= 5) { // This move will allow a pit steal
-      }
-    }
-    return scoreDiff;
-  }
+	/**
+	 * Return the difference between current MAX and MIN score.
+	 */
+	public double utility() {
+		double max_pieces = 0;
+		double min_pieces = 0;
+		for (int i = 0; i < MAX_SCORE_PIT; i++) {
+		  max_pieces += state[i];
+		}
+		for (int i = MAX_SCORE_PIT + 1; i < MIN_SCORE_PIT; i++) {
+		  min_pieces += state[i];
+		}
+		return (max_pieces + state[MAX_SCORE_PIT]) - (min_pieces + state[MIN_SCORE_PIT]);
+	}
 }

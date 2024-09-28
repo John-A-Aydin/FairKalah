@@ -24,7 +24,7 @@ public class JohnAMancalaPlayer implements MancalaPlayer {
 
 		// Create a new copy of the input node that uses the
 		// score difference heuristic evaluation function. 
-		JohnA1MancalaNode searchNode = new JohnA1MancalaNode(node);
+		JohnA4MancalaNode searchNode = new JohnA4MancalaNode(node);
 
 		searcher.eval(searchNode);
 		return searcher.getBestMove();
