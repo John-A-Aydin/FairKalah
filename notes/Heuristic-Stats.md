@@ -45,6 +45,6 @@ Ties: 20
 
 252 Trials
 
-P1 Wins 147
+P1 Wins 147Cur
 
 P2 Wins 86
