@@ -5,7 +5,7 @@
  * @author Todd W. Neller
  */
 
-public class SimpleMancalaPlayer implements MancalaPlayer {
+public class JohnA2MancalaPlayer implements MancalaPlayer {
 
 	/**
 	 * Choose a move for the given game situation given play time
@@ -24,8 +24,8 @@ public class SimpleMancalaPlayer implements MancalaPlayer {
 
 		// Create a new copy of the input node that uses the
 		// score difference heuristic evaluation function. 
-		ScoreDiffMancalaNode searchNode = new ScoreDiffMancalaNode(node);
-
+		JohnA4MancalaNode searchNode = new JohnA4MancalaNode(node);
+		
 		searcher.eval(searchNode);
 		return searcher.getBestMove();
 	}

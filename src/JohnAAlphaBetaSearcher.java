@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author Todd W. Neller
  */
-public class MinimaxSearcher implements GameTreeSearcher {
+public class JohnAAlphaBetaSearcher implements GameTreeSearcher {
 	/**
 	 * variable <code>depthLimit</code> - the depth limit of
 	 * minimax search */
@@ -29,7 +29,7 @@ public class MinimaxSearcher implements GameTreeSearcher {
 	 *
 	 * @param depthLimit an <code>int</code> value - the depth of
 	 * the minimax search tree*/
-	public MinimaxSearcher(int depthLimit) {
+	public JohnAAlphaBetaSearcher(int depthLimit) {
 		this.depthLimit = depthLimit;
 	}
 
@@ -43,7 +43,9 @@ public class MinimaxSearcher implements GameTreeSearcher {
 	public double eval(GameNode node)
 	{
 		nodeCount = 0;
-		return minimaxEval(node, depthLimit);
+		double alpha = Double.NEGATIVE_INFINITY;
+		double beta = Double.POSITIVE_INFINITY;
+		return minimaxEval(node, depthLimit, alpha, beta);
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class MinimaxSearcher implements GameTreeSearcher {
 	 * @param node a <code>GameNode</code> value
 	 * @param depthLeft an <code>int</code> value
 	 * @return a <code>double</code> value */
-	public double minimaxEval(GameNode node, int depthLeft) {
+	public double minimaxEval(GameNode node, int depthLeft, double alpha, double beta) {
 		int localBestMove = GameNode.UNDEFINED_MOVE;
 		boolean maximizing = (node.getPlayer() == GameNode.MAX);
 		double bestUtility =
@@ -70,12 +72,18 @@ public class MinimaxSearcher implements GameTreeSearcher {
 		// Evaluate the depth-limited minimax value for each
 		// child, keeping track of the best
 		for (GameNode child : children) {
-			double childUtility = minimaxEval(child, depthLeft - 1);
+			double childUtility = minimaxEval(child, depthLeft - 1, alpha, beta);
 			// update the best utility and move if appropriate
-			if ((maximizing && childUtility > bestUtility)
-							|| (!maximizing && childUtility < bestUtility)) {
+			if ((maximizing && childUtility > bestUtility) || (!maximizing && childUtility < bestUtility)) {
 				bestUtility = childUtility;
 				localBestMove = child.prevMove;
+			}
+			if (maximizing) { // Maximizing
+				alpha = Math.max(alpha, childUtility);
+				if (beta <= alpha) break;
+			} else { // Minimizing
+				beta = Math.min(beta, childUtility);
+				if (beta <= alpha) break;
 			}
 		}
 

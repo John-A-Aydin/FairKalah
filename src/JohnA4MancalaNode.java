@@ -33,6 +33,7 @@ public class JohnA4MancalaNode extends MancalaNode {
 	 * Return the difference between current MAX and MIN score.
 	 */
 	public double utility() {
+
 		// Declaring heuristic weights
 		double w1 = 0.7;
 		double w2 = 0.1;
@@ -40,6 +41,10 @@ public class JohnA4MancalaNode extends MancalaNode {
 		double w4 = 0.1;
 		// First heuristic: Score Diff
 		double h1 = state[MAX_SCORE_PIT] - state[MIN_SCORE_PIT];
+//		if (this.gameOver()) {
+//			if (h1 > 0) return 1000;
+//			if (h1 < 0) return -1000;
+//		}
 		// Second heuristic: Double turns
 		double h2 = 0;
 		for (int i = 0; i < MAX_SCORE_PIT; i++) {
@@ -47,7 +52,7 @@ public class JohnA4MancalaNode extends MancalaNode {
 				h2++;
 			}
 		}
-		// Third and Fourht heuristics: Piece distribution
+		// Third and Fourth heuristics: Piece distribution
 		double h3 = 0;
 		for (int i = 0; i < MAX_SCORE_PIT; i++) {
 			if (state[i] == 0) {
@@ -63,6 +68,6 @@ public class JohnA4MancalaNode extends MancalaNode {
 		// Don't your side to be too sparse or too full
 		h3 = -(h3-3)*(h3-3) + 9;
 		h4 = -(h4-3)*(h4-3) + 9;
-		return w1*h1 + w2*h2 + w3*h3 + w4+h4;
+		return w1*h1 + w2*h2 + w3*h3 - w4*h4;
 	}
 }

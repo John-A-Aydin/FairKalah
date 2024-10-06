@@ -20,7 +20,7 @@ public class JohnAMancalaPlayer implements MancalaPlayer {
 		if (depthLimit < 1) depthLimit = 1;
 
 		// Create a minimax searcher.
-		MinimaxSearcher searcher = new MinimaxSearcher(depthLimit);
+		JohnAAlphaBetaSearcher searcher = new JohnAAlphaBetaSearcher(depthLimit);
 
 		// Create a new copy of the input node that uses the
 		// score difference heuristic evaluation function. 

@@ -127,13 +127,13 @@ public class JohnAMancalaMT {
 			threads[i] = new Thread(r);
 			threads[i].start();
 		}
-		for (int i = 0; i < threads.length; i++) {
-			try {
-				threads[i].join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+    for (Thread thread : threads) {
+      try {
+        thread.join();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
 		int p1TotalWins = 0;
 		int p2TotalWins = 0;
 		for (int i = 0; i < p1Wins.size(); i++) {
