@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author Todd W. Neller
  */
-public class JohnAAlphaBetaSearcher implements GameTreeSearcher {
+public class SimpleAlphaBetaSearcher implements GameTreeSearcher {
 	/**
 	 * variable <code>depthLimit</code> - the depth limit of
 	 * minimax search */
@@ -29,7 +29,7 @@ public class JohnAAlphaBetaSearcher implements GameTreeSearcher {
 	 *
 	 * @param depthLimit an <code>int</code> value - the depth of
 	 * the minimax search tree*/
-	public JohnAAlphaBetaSearcher(int depthLimit) {
+	public SimpleAlphaBetaSearcher(int depthLimit) {
 		this.depthLimit = depthLimit;
 	}
 
@@ -59,7 +59,7 @@ public class JohnAAlphaBetaSearcher implements GameTreeSearcher {
 		int localBestMove = GameNode.UNDEFINED_MOVE;
 		boolean maximizing = (node.getPlayer() == GameNode.MAX);
 		double bestUtility =
-				maximizing ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
+						maximizing ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
 		nodeCount++;
 
 		// Return utility if game over or depth limit reached

@@ -5,29 +5,33 @@
  * @author Todd W. Neller
  */
 
-public class SimpleMancalaPlayer implements MancalaPlayer {
+public class TestMancalaPlayer implements MancalaPlayer {
+	private int n;
+
+	public TestMancalaPlayer() {
+		n = 0;
+	}
 
 	/**
 	 * Choose a move for the given game situation given play time
 	 * remaining.  */
 	public int chooseMove(MancalaNode node, long timeRemaining) {
-		// TODO - WARNING: This is a simple time management effort 
-		// to distribute search time over course of game.  
-		// It under-utilizes time, so you should design better time management.
-		final double DEPTH_FACTOR = 1.3;
-		int depthLimit = (int) (DEPTH_FACTOR * Math.log((double) timeRemaining 
-							/ piecesRemaining(node)));
-		if (depthLimit < 1) depthLimit = 1;
+		int depth = 15;
+		long t_next_move = timeRemaining/piecesRemaining(node);
 
 		// Create a minimax searcher.
-		SimpleAlphaBetaSearcher searcher = new SimpleAlphaBetaSearcher(15);
+		JohnAAlphaBetaSearcher searcher = new JohnAAlphaBetaSearcher(depth);
+		JohnA4MancalaNode searchNode = new JohnA4MancalaNode(node);
 
-		// Create a new copy of the input node that uses the
-		// score difference heuristic evaluation function. 
-		ScoreDiffMancalaNode searchNode = new ScoreDiffMancalaNode(node);
-
+		long startTime = System.currentTimeMillis();
 		searcher.eval(searchNode);
+		long endTime = System.currentTimeMillis();
+		long current_time  = endTime - startTime;
+		System.out.println(n + " - " + current_time);
+		this.n++;
+
 		return searcher.getBestMove();
+
 	}
 
 

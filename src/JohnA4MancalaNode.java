@@ -33,41 +33,60 @@ public class JohnA4MancalaNode extends MancalaNode {
 	 * Return the difference between current MAX and MIN score.
 	 */
 	public double utility() {
-
-		// Declaring heuristic weights
 		double w1 = 0.7;
-		double w2 = 0.1;
-		double w3 = 0.1;
-		double w4 = 0.1;
+		double w2 = 0.275;
+		double w3 = 0.01;
 		// First heuristic: Score Diff
-		double h1 = state[MAX_SCORE_PIT] - state[MIN_SCORE_PIT];
-//		if (this.gameOver()) {
-//			if (h1 > 0) return 1000;
-//			if (h1 < 0) return -1000;
-//		}
+		int h1 = state[6] - state[13];
+
 		// Second heuristic: Double turns
-		double h2 = 0;
-		for (int i = 0; i < MAX_SCORE_PIT; i++) {
-			if (state[i] + i == MAX_SCORE_PIT) {
-				h2++;
-			}
+		int h2 = 0;
+		int h3 = 0;
+		int i = 1;
+		if (state[0] == 6) {
+			h2++;
+		} else if (state[0] == 0) {
+			h3++;
 		}
-		// Third and Fourth heuristics: Piece distribution
-		double h3 = 0;
-		for (int i = 0; i < MAX_SCORE_PIT; i++) {
-			if (state[i] == 0) {
-				h3++;
-			}
+		if (state[i] + i == 6) {
+			h2++;
+		} else if (state[i] == 0) {
+			h3++;
+		}
+		i++;
+		if (state[i] + i == 6) {
+			h2++;
+		} else if (state[i] == 0) {
+			h3++;
+		}
+		i++;
+		if (state[i] + i == 6) {
+			h2++;
+		} else if (state[i] == 0) {
+			h3++;
+		}
+		i++;
+		if (state[i] + i == 6) {
+			h2++;
+		} else if (state[i] == 0) {
+			h3++;
+		}
+		i++;
+		if (state[i] + i == 6) {
+			h2++;
+		} else if (state[i] == 0) {
+			h3++;
 		}
 		double h4 = 0;
-		for (int i = MAX_SCORE_PIT + 1; i < MIN_SCORE_PIT; i++) {
-			if (state[i] == 0) {
-				h4++;
-			}
+		if (state[MAX_SCORE_PIT] > 24) {
+			h4 = 100;
+		} else if (state[MIN_SCORE_PIT] > 24) {
+			h4 = -100;
 		}
-		// Don't your side to be too sparse or too full
-		h3 = -(h3-3)*(h3-3) + 9;
-		h4 = -(h4-3)*(h4-3) + 9;
-		return w1*h1 + w2*h2 + w3*h3 - w4*h4;
+		// Third and Fourth heuristics: Piece distribution
+		// Don't want your side to be too sparse or too full
+		h3 = (h3-3)*(h3-3) + 9;
+
+		return w1*h1 + w2*h2 + w3*h3 + h4;
 	}
 }

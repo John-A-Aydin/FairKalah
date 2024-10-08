@@ -77,7 +77,8 @@ public class Mancala {
 				// Display Progress
 				System.out.println(node);
 			}
-
+			System.out.println(playerMillisRemaining[GameNode.MAX]);
+			System.out.println(playerMillisRemaining[GameNode.MIN]);
 			// Display winner and statistics
 			if (node.gameOver())
 				if (node.utility() > 0)

@@ -36,7 +36,7 @@ class MancalaRunnable implements Runnable {
 
 			// TODO (*1*) put player one class here
 			// player[GameNode.MAX] = new HumanMancalaPlayer();
-			player[GameNode.MAX] = new JohnAMancalaPlayer();
+			player[GameNode.MAX] = new JohnA1MancalaPlayer();
 
 			// TODO (*2*) put player two class here
 			//  player[GameNode.MIN] = new HumanMancalaPlayer();
@@ -55,7 +55,6 @@ class MancalaRunnable implements Runnable {
 
 			// While game is on...
 			int move;
-			String winner = "DRAW";
 			while (!node.gameOver()) {
 				// Request move from current player
 				long timeRemaining = playerMillisRemaining[node.player];
@@ -69,10 +68,10 @@ class MancalaRunnable implements Runnable {
 				if (playerMillisRemaining[node.player] < 0) {
 					if (node.player == GameNode.MAX) {
 						System.out.println("Player 1 game timer expired.");
-						winner = "PLAYER 2 WINS";
+						p2Wins.set(this.thread_number, p2Wins.get(this.thread_number) + 1);
 					} else {
 						System.out.println("Player 2 game timer expired.");
-						winner = "PLAYER 1 WINS";
+						p1Wins.set(this.thread_number, p1Wins.get(this.thread_number) + 1);
 					}
 					break;
 				}
@@ -80,12 +79,13 @@ class MancalaRunnable implements Runnable {
 				node.makeMove(move);
 			}
 			// Display winner and statistics
-			if (node.gameOver())
+			if (node.gameOver()) {
 				if (node.utility() > 0) {
-					p1Wins.set(this.thread_number, p1Wins.get(this.thread_number)+1);
+					p1Wins.set(this.thread_number, p1Wins.get(this.thread_number) + 1);
 				} else if (node.utility() < 0) {
-					p2Wins.set(this.thread_number, p2Wins.get(this.thread_number)+1);
+					p2Wins.set(this.thread_number, p2Wins.get(this.thread_number) + 1);
 				}
+			}
 			long p1Time = (MILLISECONDS_PER_GAME / 2L - playerMillisRemaining[GameNode.MAX]);
 			long p2Time = (MILLISECONDS_PER_GAME / 2L - playerMillisRemaining[GameNode.MIN]);
 			p1AvgTime.set(this.thread_number, p1AvgTime.get(this.thread_number) + p1Time/this.stateIdxs.length);
@@ -95,7 +95,7 @@ class MancalaRunnable implements Runnable {
 }
 public class JohnAMancalaMT {
 	protected static final int NUMBER_OF_STATES = 253;
-	protected static final int TRIALS_PER_THREAD = 36; // Max = 36
+	protected static final int TRIALS_PER_THREAD = 4; // Max = 36
 	protected static final int NUMBER_OF_THREADS = 7;
 	/**
 	 * <code>main</code> - manage a timed Mancala game
