@@ -3,13 +3,13 @@
 
 FairKalah is a version of Mancala where all starting states are fair, meaning, with optimal play, the game will result in a draw. In this project, I found a suitable heuristic for minimax search, implemented alpha-beta pruning, and leveraged different time management strategies to build a capable Mancala player. This player will be pitted against a simple mancala player for evaluation.
 
-### Data Needed:
+## Data Needed:
 
 The set of fair initial states for Mancala.
 
-### Methods:
+## Methods:
 
-##### Heuristics
+### Heuristics
 
 The heuristic I chose looks at:
 
@@ -51,29 +51,29 @@ Running my player against a simple player:
 75 losses
 15 ties
 
-##### Alpha-Beta Pruning:
+### Alpha-Beta Pruning:
 
 Alpha-Beta pruning removes nodes from minimax search that will not effect the outcome of the final result. This cuts the time for any given search significantly, but introduces large variations in time taken, where some searches take a very long time and others do not.
 
 Both my player and the simple player were implemented using alpha beta pruning.
 
-##### Time Management:
+### Time Management:
 
 Time management was the key in beating the simple mancala player.
 
-###### Heuristic Optimization
+#### Heuristic Optimization
 
 The first issue I had to address was the time difference between my player and the simple player during state evaluation. Testing the two side by side with a search depth of 10, my player took around 630 ms during a full game, while the simple player only took around 300. To close this gap, I used several techniques including loop unrolling, minimizing floating point operations and typecasting, and cache optimization. With these techniques, I was able to bring the total play time, with a search depth of 10, down to 500 ms. 
 
-###### Fail Safe
+#### Fail Safe
 
 To prevent the program from going over it's allotted time, I measured the average time it takes for various search depths to complete a full game. Using this information, I created breakpoints where my player will switch from the prescribed time management strategy to using a constant depth that should be able to complete an entire game of mancala in the time that my player has remaining. I found that three levels of this provided optimal results.
 
-###### Side Effects of Alpha-Beta Pruning
+#### Side Effects of Alpha-Beta Pruning
 
 One of the first things I noticed while testing different time management strategies is that early game states took significantly longer to evaluate than mid or endgame states. These early game states almost always had search times that were comparable to minimax without alpha-beta pruning.
 
-###### Performance:
+#### Performance:
 
 Since each game takes around 5 minutes to complete, I only tested different time management strategies over 56 games.
 
@@ -128,13 +128,13 @@ Losses: 18
 
 Ties: 4
 
-### What I didn't get to do:
+## What I didn't get to do:
 
 The project recommends using a dynamic or semi dynamic time strategy where your next move is derived from the amount of time you're willing to spend on that move. I wasn't able to do this because of the amount of variation I saw in the amount of time each move took. When I tried using this strategy my player was only using around a third or fourth of its time and never entered the emergency fail safe mode.
 
 Another reason for this shortcoming was that each time I wanted to test a time management strategy, I had to use every thread on my computer for 10-20 minutes which severely limited the amount of changes I could try.
 
-### Experience
+## Experience
 
 This was a really cool project. It showed me how important the basic operation is when considering the time complexity of an algorithm, gave me hands on experience with the advantages and limitations of minimax search with alpha-beta pruning, and showed me the importance of computational power when working with AI.
 
