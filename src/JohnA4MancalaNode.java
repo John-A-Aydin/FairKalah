@@ -85,7 +85,7 @@ public class JohnA4MancalaNode extends MancalaNode {
 		}
 		// Third and Fourth heuristics: Piece distribution
 		// Don't want your side to be too sparse or too full
-		h3 = (h3-3)*(h3-3) + 9;
+		h3 = -(h3-3)*(h3-3) + 9;
 
 		return w1*h1 + w2*h2 + w3*h3 + h4;
 	}
