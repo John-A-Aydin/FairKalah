@@ -1,3 +1,9 @@
+# Some notes
+
+This assignment is a Model AI Assignemnt.
+
+The full description can be found [here](http://modelai.gettysburg.edu/2022/fairkalah/)
+
 # Report
 ### Key Idea
 
